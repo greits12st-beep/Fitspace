@@ -7,11 +7,33 @@
     <meta name="color-scheme" content="dark" />
     <meta name="description" content="Fit Space — личный фитнес-кабинет: КБЖУ, тренировки, упражнения и прогресс." />
     <title>Fit Space</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <script>
+      // Аварийный экран: если приложение не запустилось за 10 секунд, показать причину вместо белого экрана.
+      (function () {
+        var errs = [];
+        window.addEventListener('error', function (e) {
+          var t = e.target;
+          if (t && t !== window && (t.src || t.href)) errs.push('Не загрузился файл: ' + (t.src || t.href));
+          else errs.push((e.message || 'Ошибка') + (e.filename ? ' (' + e.filename.split('/').pop() + ':' + e.lineno + ')' : ''));
+        }, true);
+        window.addEventListener('unhandledrejection', function (e) { errs.push('Promise: ' + ((e.reason && e.reason.message) || e.reason)); });
+        setTimeout(function () {
+          var r = document.getElementById('root');
+          if (!r || r.childElementCount) return;
+          var tg = window.Telegram && window.Telegram.WebApp;
+          var info = (errs.join('\n') || 'Приложение не загрузилось за 10 секунд') + '\n\n' + navigator.userAgent + '\nTelegram: ' + ((tg && tg.version) || 'нет') + ' · ' + ((tg && tg.platform) || '');
+          r.innerHTML = '<div style="min-height:100vh;padding:24px;background:#08080F;color:#fff;font:15px -apple-system,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Fit Space не запустился</h2><p style="color:#A1A1AA;margin:0 0 16px">Сделай скриншот этого экрана и отправь разработчику. Попробуй обновить Telegram.</p><pre style="white-space:pre-wrap;word-break:break-word;color:#FCA5A5;font-size:12px;margin:0"></pre><button style="margin-top:20px;padding:12px 18px;border:0;border-radius:12px;background:#7B5CFF;color:#fff;font-weight:600" onclick="location.reload()">Обновить</button></div>';
+          r.querySelector('pre').textContent = info;
+        }, 10000);
+      })();
+    </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="main.css?v=0.31" />
+    <link rel="stylesheet" href="main.css?v=0.32" />
   </head>
   <body>
     <div id="root"></div>
-    <script src="main.js?v=0.31"></script>
+    <script src="main.js?v=0.32"></script>
   </body>
 </html>
