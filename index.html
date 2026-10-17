@@ -21,19 +21,36 @@
         window.addEventListener('unhandledrejection', function (e) { errs.push('Promise: ' + ((e.reason && e.reason.message) || e.reason)); });
         setTimeout(function () {
           var r = document.getElementById('root');
-          if (!r || r.childElementCount) return;
+          if (r && r.childElementCount) return;
+          if (!r) { r = document.createElement('div'); (document.body || document.documentElement).appendChild(r); }
           var tg = window.Telegram && window.Telegram.WebApp;
-          var info = (errs.join('\n') || 'Приложение не загрузилось за 10 секунд') + '\n\n' + navigator.userAgent + '\nTelegram: ' + ((tg && tg.version) || 'нет') + ' · ' + ((tg && tg.platform) || '');
+          var info = (errs.join('\n') || 'Приложение не загрузилось за 10 секунд') + '\n\n' + navigator.userAgent + '\nTelegram SDK: ' + (window.__tgLoad || '?') + '\nTelegram: ' + ((tg && tg.version) || 'нет') + ' · ' + ((tg && tg.platform) || '');
           r.innerHTML = '<div style="min-height:100vh;padding:24px;background:#08080F;color:#fff;font:15px -apple-system,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Fit Space не запустился</h2><p style="color:#A1A1AA;margin:0 0 16px">Сделай скриншот этого экрана и отправь разработчику. Попробуй обновить Telegram.</p><pre style="white-space:pre-wrap;word-break:break-word;color:#FCA5A5;font-size:12px;margin:0"></pre><button style="margin-top:20px;padding:12px 18px;border:0;border-radius:12px;background:#7B5CFF;color:#fff;font-weight:600" onclick="location.reload()">Обновить</button></div>';
           r.querySelector('pre').textContent = info;
         }, 10000);
       })();
     </script>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="main.css?v=0.32" />
+    <script>
+      // Telegram SDK без блокировки страницы: сначала своя копия рядом с сайтом, если её нет — с telegram.org.
+      // Если telegram.org недоступен у оператора, страница всё равно откроется, а не повиснет белой.
+      (function () {
+        var srcs = ['telegram-web-app.js?v=1', 'https://telegram.org/js/telegram-web-app.js'];
+        window.__tgLoad = 'грузится';
+        function next(i) {
+          if (i >= srcs.length) { window.__tgLoad = 'не загрузился ни из одного источника'; return; }
+          var s = document.createElement('script');
+          s.src = srcs[i];
+          s.onload = function () { window.__tgLoad = window.Telegram && window.Telegram.WebApp ? 'загружен: ' + srcs[i] : 'пустой файл: ' + srcs[i]; if (!(window.Telegram && window.Telegram.WebApp)) next(i + 1); };
+          s.onerror = function () { s.remove(); next(i + 1); };
+          document.head.appendChild(s);
+        }
+        next(0);
+      })();
+    </script>
+    <link rel="stylesheet" href="main.css?v=0.33" />
   </head>
   <body>
     <div id="root"></div>
-    <script src="main.js?v=0.32"></script>
+    <script src="main.js?v=0.33"></script>
   </body>
 </html>
