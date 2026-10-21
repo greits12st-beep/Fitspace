@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
-    <meta name="theme-color" content="#08080F" />
+    <meta name="theme-color" content="#0D0C0B" />
     <meta name="color-scheme" content="dark" />
     <meta name="description" content="Fit Space — личный фитнес-кабинет: КБЖУ, тренировки, упражнения и прогресс." />
     <title>Fit Space</title>
@@ -25,7 +25,7 @@
           if (!r) { r = document.createElement('div'); (document.body || document.documentElement).appendChild(r); }
           var tg = window.Telegram && window.Telegram.WebApp;
           var info = (errs.join('\n') || 'Приложение не загрузилось за 10 секунд') + '\n\n' + navigator.userAgent + '\nTelegram SDK: ' + (window.__tgLoad || '?') + '\nTelegram: ' + ((tg && tg.version) || 'нет') + ' · ' + ((tg && tg.platform) || '');
-          r.innerHTML = '<div style="min-height:100vh;padding:24px;background:#08080F;color:#fff;font:15px -apple-system,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Fit Space не запустился</h2><p style="color:#A1A1AA;margin:0 0 16px">Сделай скриншот этого экрана и отправь разработчику. Попробуй обновить Telegram.</p><pre style="white-space:pre-wrap;word-break:break-word;color:#FCA5A5;font-size:12px;margin:0"></pre><button style="margin-top:20px;padding:12px 18px;border:0;border-radius:12px;background:#7B5CFF;color:#fff;font-weight:600" onclick="location.reload()">Обновить</button></div>';
+          r.innerHTML = '<div style="min-height:100vh;padding:24px;background:#0D0C0B;color:#fff;font:15px -apple-system,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Fit Space не запустился</h2><p style="color:#A1A1AA;margin:0 0 16px">Сделай скриншот этого экрана и отправь разработчику. Попробуй обновить Telegram.</p><pre style="white-space:pre-wrap;word-break:break-word;color:#FCA5A5;font-size:12px;margin:0"></pre><button style="margin-top:20px;padding:12px 18px;border:0;border-radius:12px;background:#FF5B1F;color:#fff;font-weight:600" onclick="location.reload()">Обновить</button></div>';
           r.querySelector('pre').textContent = info;
         }, 10000);
       })();
@@ -47,10 +47,10 @@
         next(0);
       })();
     </script>
-    <link rel="stylesheet" href="main.css?v=0.36" />
+    <link rel="stylesheet" href="main.css?v=0.37" />
   </head>
   <body>
     <div id="root"></div>
-    <script src="main.js?v=0.36"></script>
+    <script src="main.js?v=0.37"></script>
   </body>
 </html>
